@@ -26,7 +26,7 @@ public class IndexController implements java.io.Serializable {
 
 	@PostConstruct
 	public void init() {
-		posts = new PostFacade().findAllOrderByLastUpdated(15);
+		posts = new PostFacade().findAllOrderByLastUpdated(6);
 	}
 
 	// ================================ List ================================
