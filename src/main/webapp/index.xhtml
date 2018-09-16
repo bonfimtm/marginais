@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+	<ui:composition template="/WEB-INF/template.xhtml">
+		<ui:define name="title">
+			Marginais, comunicação à margem
+		</ui:define>
+
+		<ui:define name="content">
+
+			<!-- Header/Homepage
+		    ================================================== -->
+
+			<header id="banner"> </header>
+
+			<!-- Portfolio Section
+		    ================================================== -->
+
+			<section id="portfolio" class="grid"> <c:if
+				test="#{empty indexController.posts}">
+				<h3>Sem Postagens</h3>
+			</c:if> <c:if test="#{not empty indexController.posts}">
+				<c:forEach items="#{indexController.posts}" var="item">
+
+					<figure class="effect-portfolio wow fadeIn" data-wow-duration="1s">
+
+					<!-- Image Posts -->
+					<c:if test="#{item.videoLink == null}">
+						<div class="img-thumb col-xs-12"
+							style="background-image: url('#{request.contextPath}/image?item_id=#{indexController.getFirstPictureId(item.id)}');">
+						</div>
+					</c:if>
+					
+					<!-- Video Posts -->
+					<c:if test="#{item.videoLink != null}">
+						
+						<c:choose>
+						    <c:when test="#{indexController.getFirstPictureId(item.id) != null}">
+						    	<div class="img-thumb"
+									style="background-image: url('#{request.contextPath}/image?item_id=#{indexController.getFirstPictureId(item.id)}');">
+								</div>
+						    </c:when>
+						    <c:otherwise>
+							    <div class="img-thumb">
+									<iframe src="http://www.youtube.com/embed/#{item.videoLink}"
+										allowfullscreen="allowfullscreen"
+										style="width: 100%; height: 100%" frameBorder="0"
+										frameborder="0"></iframe>
+								</div>
+						    </c:otherwise>
+					    </c:choose>
+						
+					</c:if>
+					
+					<figcaption>
+						<h2>#{item.title}</h2>
+						<p>#{item.subTitle}</p>
+						<a class="portfolio-link" href="materia/#{item.urlAddress}">Leia
+							Mais</a>
+					</figcaption>
+					
+					</figure>
+
+				</c:forEach>
+			</c:if> </section>
+			<!-- End Portfolio Section -->
+
+			<!-- Portfolio Title -->
+			<div class="light-overlay ptitle">
+				<h2>Matérias e Vídeos</h2>
+				<h5>Confira nosso conteúdo!</h5>
+			</div>
+
+			<!-- Vision/Mission 
+		    ================================================== -->
+			<section id="vision">
+			<div id="carousel-example-generic" class="carousel slide"
+				data-ride="carousel">
+				<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<li data-target="#carousel-example-generic" data-slide-to="0"
+						class="active"></li>
+					<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+					<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+				</ol>
+
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner">
+					<div class="item active">
+						<div class="dark-overlay vision">
+							<div class="vision-border centered wow bounceIn">
+								<h4>Comunicação à margem</h4>
+								<h2>Fotografia</h2>
+								<h6></h6>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="dark-overlay vision">
+							<div class="vision-border centered wow bounceIn">
+								<h4>Comunicação à margem</h4>
+								<h2>Arte</h2>
+								<h6></h6>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="dark-overlay vision">
+							<div class="vision-border centered wow bounceIn">
+								<h4>Comunicação à margem</h4>
+								<h2>Conteúdo</h2>
+								<h6></h6>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</section>
+
+			<!-- Call-To-Action Section
+		    ================================================== -->
+			<section id="subscribe">
+			<div class="container">
+				<h:form id="subscription-form">
+					<div class="row text-center">
+						<div class="col-md-12">
+							<h:messages styleClass="help-block text-danger" globalOnly="true" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 wow fadeIn" data-wow-delay="0.2s">
+							<p>
+								<span>Receba nosso material periodicamente por e-mail.</span>
+							</p>
+						</div>
+						<div class="col-md-3 wow fadeIn" data-wow-delay="0.3s">
+							<p>
+								<h:inputText autocomplete="off" styleClass="form-control"
+									pt:placeholder="E-mail *" id="email" required="true"
+									requiredMessage="Por favor, informe seu enderço de e-mail."
+									value="#{subscripeController.email}"
+									validatorMessage="E-mail inválido.">
+									<f:validateRegex
+										pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+								</h:inputText>
+							</p>
+							<h:message styleClass="help-block text-danger" for="email" />
+						</div>
+						<div class="col-md-2 wow fadeIn" data-wow-delay="0.4s">
+							<p>
+								<p:commandLink styleClass="btn left btn-send"
+									value="Inscrever-se"
+									actionListener="#{subscripeController.subscripe}"
+									update="subscription-form" />
+								<p:commandButton value=""
+									actionListener="#{subscripeController.subscripe}"
+									update="subscription-form" style="display: none;" />
+							</p>
+							<!-- Subscribe button -->
+						</div>
+
+						<div class="col-md-1 wow fadeIn" data-wow-delay="0.4s">
+							<p:ajaxStatus style="width:24px;height:24px;"
+								id="subscripeAjaxStatusPanel">
+								<f:facet name="start">
+									<p>
+										<h:graphicImage name="img/ajaxloadingdark.gif" alt="" />
+									</p>
+								</f:facet>
+								<f:facet name="complete">
+								</f:facet>
+							</p:ajaxStatus>
+						</div>
+					</div>
+				</h:form>
+			</div>
+			</section>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

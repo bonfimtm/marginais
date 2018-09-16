@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Administração - Postagens</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<h:outputStylesheet name="css/bootstrap.min.css" />
+	<h:outputStylesheet name="css/font-awesome.min.css" />
+	<h:outputStylesheet name="css/custom.min.css" />
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+</h:head>
+<h:body>
+
+	<div class="container">
+		<div class="col-md-12">
+			<c:if test="#{authController.authorized}">
+
+				<div class="row">
+					<div class="col-md-10">
+						<h1>
+							Postagem
+						</h1>
+					</div>
+					<div class="col-md-2">
+						<h:form>
+							<h1>
+								<h:commandLink styleClass="btn btn-default"
+									action="#{authController.unAuth}">
+									<i class="fa fa-sign-out"></i> Sair
+								</h:commandLink>
+							</h1>
+						</h:form>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-8">
+
+						<h:form id="new-post-form">
+							<p:growl id="global-messages" />
+
+							<h:inputText styleClass="form-control"
+								value="#{adminCreateEditPostController.title}"
+								pt:placeholder="Título *" maxlength="170" required="true"
+								requiredMessage="O Título é obrigatório!" />
+
+							<br />
+							<h:inputText styleClass="form-control"
+								value="#{adminCreateEditPostController.subTitle}"
+								pt:placeholder="Subtítulo" maxlength="170" />
+
+							<br />
+							<h:inputText styleClass="form-control"
+								value="#{adminCreateEditPostController.videoLink}"
+								pt:placeholder="Id do vídeo" maxlength="20" />
+
+							<br />
+							<span class="text-muted">Texto *</span>
+							<p:editor value="#{adminCreateEditPostController.content}"
+								rows="10" required="true"
+								requiredMessage="O Texto é obrigatório!" />
+
+							<br />
+							Selecione as imagens da postagem:
+							<p:message id="photo-upload-messages" for="photo-upload" />
+							<p:fileUpload id="photo-upload"
+								fileUploadListener="#{adminCreateEditPostController.handleFileUpload}"
+								mode="advanced" auto="true" sizeLimit="2097152"
+								allowTypes="/(\.|\/)(jpeg|jpg)$/"
+								label="Adicionar Fotos" uploadLabel="Enviar"
+								cancelLabel="Cancelar"
+								invalidSizeMessage="Tamanho máximo de arquivo excedido. O tamanho máximo permitido é 2 MB."
+								invalidFileMessage="Tipo de aquivo inválido."
+								fileLimitMessage="Número máximo de arquivos excedido. Você pode anexar no máximo 10 arquivos por postagem."
+								dragDropSupport="true"
+								update="global-messages,photo-upload-messages,photos-items"
+								multiple="true" fileLimit="10" />
+							<br />
+
+							<h:panelGroup id="photos-items" class="row">
+
+								<!-- Create -->
+								<c:if test="#{adminCreateEditPostController.postId == null}">
+									<c:forEach items="#{adminCreateEditPostController.pictures}"
+										var="item">
+
+										<div class="col-md-2">
+											<p:commandLink styleClass="close" title="Remover Imagem"
+												immediate="true"
+												actionListener="#{adminCreateEditPostController.deletePictureFromView(item)}"
+												update="@form">
+												&times;
+											</p:commandLink>
+											
+											<br /> #{item.fileName}
+										</div>
+
+									</c:forEach>
+								</c:if>
+
+								<!-- Edit -->
+								<c:if test="#{adminCreateEditPostController.postId != null}">
+									<c:forEach items="#{adminCreateEditPostController.pictures}"
+										var="item">
+
+										<div class="col-md-2">
+											<p:commandLink styleClass="close" title="Excluir Imagem"
+												immediate="true"
+												actionListener="#{adminCreateEditPostController.deletePicture(item)}"
+												update="@form">
+												&times;
+											</p:commandLink>
+											<p:graphicImage value="#{imageService.xsThumb}" cache="false"
+												styleClass="img-responsive"
+												style="width: 200px; text-align: center;">
+												<f:param name="item_id" value="#{item.id}" />
+											</p:graphicImage>
+
+											<br /> #{item.fileName}
+										</div>
+
+									</c:forEach>
+								</c:if>
+
+							</h:panelGroup>
+
+
+							<br />
+							<div class="row">
+
+								<div class="col-xs-12 col-md-2">
+									<p:commandLink styleClass="btn btn-success"
+										action="#{adminCreateEditPostController.createOrEdit}"
+										process="new-post-form" update="new-post-form">
+										<i class="fa fa-floppy-o"></i>
+										<h:outputText value=" Postar"
+											rendered="#{adminCreateEditPostController.postId == null}" />
+										<h:outputText value=" Atualizar"
+											rendered="#{adminCreateEditPostController.postId != null}" />
+									</p:commandLink>
+								</div>
+
+							</div>
+						</h:form>
+
+					</div>
+				</div>
+
+				<br />
+				<br />
+				<br />
+				<div class="row">
+					<div class="col-xs-12 col-md-1">
+						<a class="btn btn-default"
+							href="#{request.contextPath}/admin/" title="Administração">
+							<i class="fa fa-cog fa-4x"></i>
+						</a>
+					</div>
+					<div class="col-xs-12 col-md-1">
+						<a class="btn btn-default"
+							href="#{request.contextPath}/admin/posts" title="Postagens">
+							<i class="fa fa-newspaper-o fa-4x"></i>
+						</a>
+					</div>
+				</div>
+				<br />
+				<br />
+
+			</c:if>
+		</div>
+
+		<div
+			class="col-lg-4 col-md-4 col-sm-6 col-xs-10 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-1">
+			<c:if test="#{authController.authorized == false}">
+				<h2>Você não está autorizado.</h2>
+				<a class="btn btn-primary btn-block"
+					href="#{request.contextPath}/auth"> <i class="fa fa-key"></i>
+					Autenticar
+				</a>
+			</c:if>
+		</div>
+
+	</div>
+
+	<ui:include src="/WEB-INF/fragments/globalAjaxStatus.xhtml" />
+
+	<h:outputScript name="js/bootstrap.min.js" />
+	<h:outputScript name="js/custom.min.js" />
+	
+</h:body>
+</html>
+

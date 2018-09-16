@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+	<ui:composition template="/WEB-INF/template.xhtml">
+		<ui:define name="title">
+			Matéria - Marginais, comunicação à margem
+		</ui:define>
+
+		<ui:define name="content">
+
+			<div class="blog">
+				<div class="container">
+					<div class="row">
+						<div class="blog-posts">
+							<div class="col-lg-8 col-lg-offset-2">
+								<div class="post">
+
+									<h:messages styleClass="help-block text-danger" />
+
+									<br />
+									<h3>#{viewPostController.post.title}</h3>
+
+									<br />
+									<h4>#{viewPostController.post.subTitle}</h4>
+
+									<br /> <br />
+									<ul class="list-inline">
+										<li><h5>
+												<h:outputText
+													value="Data: #{utilBean.maskDateAndTimestamp(viewPostController.post.releaseDate)}"
+													rendered="#{viewPostController.post.releaseDate != null}" />
+											</h5></li>
+										<li><h5>
+												<h:outputText
+													value="Atualização: #{utilBean.maskDateAndTimestamp(viewPostController.post.lastUpdated)}"
+													rendered="#{viewPostController.post.lastUpdated != null}" />
+											</h5></li>
+									</ul>
+
+									<c:if test="#{not empty viewPostController.post.videoLink}">
+										<div class="videoWrapper">
+											<iframe
+												src="https://www.youtube.com/embed/#{viewPostController.post.videoLink}"
+												allowfullscreen="true"></iframe>
+										</div>
+										<div class="clearfix"></div>
+									</c:if>
+
+									<div id="slider" class="carousel slide" data-ride="carousel">
+										<!-- Wrapper for slides -->
+										<div class="carousel-inner">
+
+											<c:forEach items="#{viewPostController.pictures}" var="item"
+												varStatus="status">
+
+												<c:if test="#{status.index == 0}">
+													<div class="item active text-center">
+														<a href="#portfolioModal" class="portfolio-link"
+															data-toggle="modal"> <p:graphicImage
+																value="#{imageService.picture}" cache="false"
+																styleClass="img-thumb"
+																style="text-align: center; height:60vh; width:auto; margin-left: auto; margin-right: auto;">
+																<f:param name="item_id" value="#{item.id}" />
+															</p:graphicImage>
+														</a>
+													</div>
+												</c:if>
+												<c:if test="#{status.index != 0}">
+													<div class="item text-center">
+														<a href="#portfolioModal" class="portfolio-link"
+															data-toggle="modal"> <p:graphicImage
+																value="#{imageService.picture}" cache="false"
+																styleClass="img-thumb"
+																style="text-align: center; height:60vh; width:auto; margin-left: auto; margin-right: auto;">
+																<f:param name="item_id" value="#{item.id}" />
+															</p:graphicImage>
+														</a>
+													</div>
+												</c:if>
+
+											</c:forEach>
+
+										</div>
+
+										<!-- Controls -->
+										<c:if test="#{viewPostController.pictures.size() > 1}">
+											<a class="left carousel-control" href="#slider" role="button"
+												data-slide="prev"> <span class="fa fa-caret-left fa-3x"></span>
+											</a>
+											<a class="right carousel-control" href="#slider"
+												role="button" data-slide="next"> <span
+												class="fa fa-caret-right fa-3x"></span>
+											</a>
+										</c:if>
+									</div>
+
+									<br />
+									<p>
+										<h:outputText value="#{viewPostController.post.content}"
+											escape="false" />
+									</p>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<ui:include src="/WEB-INF/fragments/modal-carousel.xhtml" />
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+	<ui:composition template="/WEB-INF/template.xhtml">
+		<ui:define name="title">
+			Vídeos - Marginais, comunicação à margem
+		</ui:define>
+
+		<ui:define name="content">
+
+			<!-- Blog
+	    ================================================== -->
+			<div class="dark-overlay vision">
+				<div class="centered vision-border wow bounceIn">
+					<h4>Vídeos</h4>
+					<h2>Marginais</h2>
+					<h6>Comunicação à margem</h6>
+				</div>
+			</div>
+
+			<br />
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<a href="https://www.youtube.com/channel/UCvyUMHGH0cT9_YNjunqUvGg"
+							target="_blank"> <h:graphicImage
+								name="img/marginais/logo/trocando_ideia.svg"
+								alt="Trocando Ideia" style="height: 200px;" />
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Blog Posts
+	    ================================================== -->
+			<div class="blog">
+				<div class="container">
+					<div class="row">
+
+						<br />
+						<h:messages styleClass="help-block text-danger" />
+
+						<c:if test="#{empty videoController.posts}">
+							<h3>Sem Postagens</h3>
+						</c:if>
+
+						<c:if test="#{not empty videoController.posts}">
+							<c:forEach items="#{videoController.posts}" var="item">
+
+								<div class="blog-posts">
+									<div class="col-lg-8 col-lg-offset-2">
+										<div class="post wow fadeIn" data-wow-duration="2s">
+											
+											<h2>#{item.title}</h2>
+											
+											<br />
+											<h4>#{item.subTitle}</h4>
+											
+											<br /> <br />
+											<ul class="list-inline">
+												<li><h5>
+														<h:outputText
+															value="Data #{utilBean.maskDateAndTimestamp(item.releaseDate)}"
+															rendered="#{item.releaseDate != null}" />
+													</h5></li>
+												<li><h5>
+														<h:outputText
+															value="Atualização: #{utilBean.maskDateAndTimestamp(item.lastUpdated)}"
+															rendered="#{item.lastUpdated != null}" />
+													</h5></li>
+											</ul>
+
+											<c:if test="#{not empty item.videoLink}">
+												<div class="videoWrapper">
+													<iframe
+														src="https://www.youtube.com/embed/#{item.videoLink}"
+														allowfullscreen="true"></iframe>
+												</div>
+												<div class="clearfix"></div>
+											</c:if>
+
+											<p>
+												<h:outputText value="#{item.content}" escape="false" />
+											</p>
+
+
+											<a class="btn btn-primary"
+												href="#{facesContext.externalContext.requestContextPath}/video/#{item.urlAddress}">
+												Saiba Mais </a>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+									<div class="divider"></div>
+								</div>
+
+							</c:forEach>
+						</c:if>
+
+
+						<!-- Pagination -->
+						<c:if test="#{videoController.totalOfPages > 1}">
+
+							<ul class="pagination">
+								<c:if test="#{videoController.hasPrev}">
+									<li><a
+										href="#{facesContext.externalContext.requestContextPath}/videos/#{videoController.pageNumber - 1}">
+											&laquo; </a></li>
+								</c:if>
+
+								<c:forEach begin="1" end="#{videoController.totalOfPages}"
+									var="item">
+									<li><a
+										class="#{item == videoController.pageNumber ? 'current-page' : ''}"
+										href="#{facesContext.externalContext.requestContextPath}/videos/#{item}">
+											#{item} </a></li>
+								</c:forEach>
+
+								<c:if test="#{videoController.hasNext}">
+									<li><a
+										href="#{facesContext.externalContext.requestContextPath}/videos/#{videoController.pageNumber + 1}">
+											&raquo; </a></li>
+								</c:if>
+							</ul>
+
+						</c:if>
+
+					</div>
+				</div>
+			</div>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

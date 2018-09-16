@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<!-- Basic Page Needs
+    ================================================== -->
+	<meta charset="utf-8" />
+	<title><ui:insert name="title">Title</ui:insert></title>
+	<meta name="description" content="Marginais, comunicação à margem" />
+	<meta name="keywords"
+		content="fotografia,photography,maginais,comunicacao,brasil,brazil,rio,rio de janeiro,rj" />
+	<meta name="author" content="Thiago Bonfim" />
+
+	<!-- Mobile Specific Metas
+    ================================================== -->
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+	<!-- Stylesheet
+    ================================================== -->
+	<h:outputStylesheet name="css/bootstrap.min.css" />
+	<h:outputStylesheet name="css/font-awesome.min.css" />
+	<h:outputStylesheet name="css/style.min.css" />
+	<h:outputStylesheet name="css/responsiveness.min.css" />
+	<h:outputStylesheet name="css/custom.min.css" />
+
+	<!-- <link rel="stylesheet" type="text/css" href="css/animate.min.css"/> -->
+
+	<!-- Favicons
+    ================================================== -->
+	<link rel="apple-touch-icon" sizes="57x57"
+		href="#{request.contextPath}/resources/img/icons/apple-touch-icon-57x57.png" />
+	<link rel="apple-touch-icon" sizes="60x60"
+		href="#{request.contextPath}/resources/img/icons/apple-touch-icon-60x60.png" />
+	<link rel="apple-touch-icon" sizes="72x72"
+		href="#{request.contextPath}/resources/img/icons/apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="76x76"
+		href="#{request.contextPath}/resources/img/icons/apple-touch-icon-76x76.png" />
+	<link rel="apple-touch-icon" sizes="114x114"
+		href="#{request.contextPath}/resources/img/icons/apple-touch-icon-114x114.png" />
+	<link rel="apple-touch-icon" sizes="120x120"
+		href="#{request.contextPath}/resources/img/icons/apple-touch-icon-120x120.png" />
+	<link rel="apple-touch-icon" sizes="144x144"
+		href="#{request.contextPath}/resources/img/icons/apple-touch-icon-144x144.png" />
+	<link rel="apple-touch-icon" sizes="152x152"
+		href="#{request.contextPath}/resources/img/icons/apple-touch-icon-152x152.png" />
+	<link rel="apple-touch-icon" sizes="180x180"
+		href="#{request.contextPath}/resources/img/icons/apple-touch-icon-180x180.png" />
+	<link rel="icon" type="image/png"
+		href="#{request.contextPath}/resources/img/icons/favicon-32x32.png"
+		sizes="32x32" />
+	<link rel="icon" type="image/png"
+		href="#{request.contextPath}/resources/img/icons/android-chrome-192x192.png"
+		sizes="192x192" />
+	<link rel="icon" type="image/png"
+		href="#{request.contextPath}/resources/img/icons/favicon-96x96.png"
+		sizes="96x96" />
+	<link rel="icon" type="image/png"
+		href="#{request.contextPath}/resources/img/icons/favicon-16x16.png"
+		sizes="16x16" />
+	<link rel="manifest"
+		href="#{request.contextPath}/resources/img/icons/manifest.json" />
+	<meta name="msapplication-TileColor" content="#000000" />
+	<meta name="msapplication-TileImage"
+		content="#{request.contextPath}/resources/img/icons/mstile-144x144.png" />
+	<meta name="msapplication-config"
+		content="#{request.contextPath}/resources/img/icons/browserconfig.xml" />
+	<meta name="theme-color" content="#000000" />
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</h:head>
+
+<h:body>
+	<!-- Preloader
+    ================================================== -->
+	<!-- <div id="preloader">
+      <div id="status">&nbsp;</div>
+    </div> -->
+
+	<!-- Navigation
+    ================================================== -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header page-scroll">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#{request.contextPath}/"><h:graphicImage
+					name="img/marginais/logo/download-3.png" alt="logo"
+					style="width: 113px;height: 85px;" /></a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#{request.contextPath}/">Início</a></li>
+				<li><a href="#{request.contextPath}/sobre">Sobre</a></li>
+				<li><a href="#{request.contextPath}/videos">Vídeos</a></li>
+				<li><a href="#{request.contextPath}/materias">Matérias</a></li>
+				<li><a href="#{request.contextPath}/contato">Contato</a></li>
+			</ul>
+		</div>
+		<!-- End navbar-collapse -->
+	</div>
+	<!-- End container --> </nav>
+
+	<div class="dark-overlay-bar"></div>
+
+
+
+	<!-- Main Content
+    ================================================== -->
+
+	<ui:insert name="content">Main Content</ui:insert>
+
+
+
+	<!-- Social Media Section
+    ================================================== -->
+	<section id="socials">
+	<div class="container wow bounceIn" data-wow-delay="0.4s">
+		<p>Mantenha-se atualizado ao nosso conteúdo</p>
+		<p>
+			>> <span class="follow"> Siga-nos </span> &lt;&lt;
+		</p>
+		<ol class="social">
+			<li><a href="https://www.facebook.com/marginaiscomunicacao"
+				target="_blank"><i class="fa fa-facebook fa-2x"></i></a></li>
+			<!-- Change # with your facebook link -->
+			<li><a href="https://twitter.com/Marginais_" target="_blank"><i
+					class="fa fa-twitter fa-2x"></i></a></li>
+			<!-- Change # with your twitter link -->
+		</ol>
+		<a class="btn btn-share" onclick="shareOnFacebook()">Compartilhar no Facebook</a>
+		&nbsp;
+		<a class="btn btn-share" onclick="shareOnTwitter()">Compartilhar no Twitter</a>
+	</div>
+	</section>
+
+	<div id="footer-nav">
+		<!-- Copyright notice on the bottom -->
+		<span>© 2015 Thiago Bonfim. Todos os direitos reservados.</span>
+	</div>
+
+	<!-- jQuery / JavaScript plugins
+    ================================================== -->
+
+	<h:outputScript name="js/modernizr.custom.js" />
+
+	<h:outputScript name="js/jquery-1.11.0.js" />
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<h:outputScript name="js/bootstrap.min.js" />
+
+	<h:outputScript name="js/wow.min.js" />
+	<!-- Content Animation -->
+	<h:outputScript name="js/SmoothScroll.min.js" />
+	<!-- Smooth scrolling page-->
+	<h:outputScript name="js/jquery.easing.min.js" />
+	<!-- <script type="text/javascript" src="js/cbpAnimatedHeader.min.js"></script> -->
+	<h:outputScript name="js/classie.min.js" />
+
+	<!-- Parallax Effects-->
+	<h:outputScript name="js/skrollr.min.js" />
+	<h:outputScript name="js/imagesloaded.min.js" />
+
+	<!-- Contact page-->
+	<h:outputScript name="js/jqBootstrapValidation.min.js" />
+	<h:outputScript name="js/contact.min.js" />
+
+	<!-- My Custom Plugin JavaScript -->
+	<h:outputScript name="js/main.min.js" />
+	<h:outputScript name="js/custom.min.js" />
+
+	<ui:include src="/WEB-INF/fragments/analytics.xhtml" />
+
+</h:body>
+</html>

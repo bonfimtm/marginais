@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+	<ui:composition template="/WEB-INF/template.xhtml">
+		<ui:define name="title">
+			Matérias - Marginais, comunicação à margem
+		</ui:define>
+
+		<ui:define name="content">
+
+			<!-- Blog
+	    ================================================== -->
+			<div class="dark-overlay vision">
+				<div class="centered vision-border wow bounceIn">
+					<h4>Matérias</h4>
+					<h2>Marginais</h2>
+					<h6>Comunicação à margem</h6>
+				</div>
+			</div>
+
+			<!-- Blog Posts
+	    ================================================== -->
+			<div class="blog">
+				<div class="container">
+					<div class="row">
+
+						<br />
+						<h:messages styleClass="help-block text-danger" />
+
+						<c:if test="#{empty postController.posts}">
+							<h3>Sem Postagens</h3>
+						</c:if>
+
+						<c:if test="#{not empty postController.posts}">
+							<c:forEach items="#{postController.posts}" var="item">
+
+								<div class="blog-posts">
+									<div class="col-lg-8 col-lg-offset-2">
+										<div class="post wow fadeIn" data-wow-duration="2s">
+
+											<h3>#{item.title}</h3>
+
+											<br />
+											<h4>#{item.subTitle}</h4>
+
+											<br /> <br />
+											<ul class="list-inline">
+												<li><h5>
+														<h:outputText
+															value="Data #{utilBean.maskDateAndTimestamp(item.releaseDate)}"
+															rendered="#{item.releaseDate != null}" />
+													</h5></li>
+												<li><br />
+													<h5>
+														<h:outputText
+															value="Atualização: #{utilBean.maskDateAndTimestamp(item.lastUpdated)}"
+															rendered="#{item.lastUpdated != null}" />
+													</h5></li>
+											</ul>
+
+											<p:graphicImage value="#{imageService.smThumb}" cache="false"
+												styleClass="img-responsive"
+												style="text-align: center; height:50vh; width:auto; margin-left: auto; margin-right: auto;"
+												rendered="#{postController.getFirstPictureId(item.id) != null}">
+												<f:param name="item_id"
+													value="#{postController.getFirstPictureId(item.id)}" />
+											</p:graphicImage>
+
+
+											<p>
+												<h:outputText value="#{item.content}" escape="false" />
+											</p>
+
+
+											<a class="btn btn-primary"
+												href="#{facesContext.externalContext.requestContextPath}/materia/#{item.urlAddress}">
+												Saiba Mais </a>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+									<div class="divider"></div>
+								</div>
+
+							</c:forEach>
+						</c:if>
+
+
+						<!-- Pagination -->
+						<c:if test="#{postController.totalOfPages > 1}">
+
+							<ul class="pagination">
+								<c:if test="#{postController.hasPrev}">
+									<li><a
+										href="#{facesContext.externalContext.requestContextPath}/materias/#{postController.pageNumber - 1}">
+											&laquo; </a></li>
+								</c:if>
+
+								<c:forEach begin="1" end="#{postController.totalOfPages}"
+									var="item">
+									<li><a
+										class="#{item == postController.pageNumber ? 'current-page' : ''}"
+										href="#{facesContext.externalContext.requestContextPath}/materias/#{item}">
+											#{item} </a></li>
+								</c:forEach>
+
+								<c:if test="#{postController.hasNext}">
+									<li><a
+										href="#{facesContext.externalContext.requestContextPath}/materias/#{postController.pageNumber + 1}">
+											&raquo; </a></li>
+								</c:if>
+							</ul>
+
+						</c:if>
+
+					</div>
+				</div>
+			</div>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

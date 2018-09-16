@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:body>
+	<ui:composition template="/WEB-INF/template.xhtml">
+		<ui:define name="title">
+			Contato - Marginais, comunicação à margem
+		</ui:define>
+
+		<ui:define name="content">
+
+			<!-- Footer Section
+		    ================================================== -->
+			<section id="footer"> <!-- Start footer -->
+			<div class="container">
+				<!-- Container -->
+				<h:graphicImage name="img/marginais/logo/download-3.svg"
+					alt="footer-logo" style="height: 200px;" /> <br />
+				<br />
+				<!-- Buttons -->
+				<a id="show" class="btn wow bounceIn" data-wow-delay="0.6s"><h2>FALE
+						CONOSCO</h2></a>
+				<!-- Button to click toggle contact form -->
+				<br />
+				<!-- Email -->
+				<p>marginaiscomunicacao@gmail.com</p>
+				<!-- Phone -->
+				<p>+55 (21) 97359-1431</p>
+			</div>
+			<!-- End container --> </section>
+			<!-- End footer -->
+
+			<!-- Toggle Contact Section
+		    ================================================== -->
+			<section id="contact"> <!-- Start contact -->
+			<div class="container">
+				<!-- Container -->
+				<h:form name="sentMessage" id="contactForm" novalidate="true">
+					<!-- Contact form -->
+					<div class="row text-center">
+						<div class="col-md-12">
+							<h:messages styleClass="help-block text-danger" globalOnly="true" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<!-- 6 column grid left form -->
+							<div class="form-group">
+								<!-- Your name input -->
+								<h:inputText autocomplete="off" styleClass="form-control"
+									pt:placeholder="Nome *" id="name"
+									value="#{contactController.name}" required="true" size="25"
+									requiredMessage="O campo Nome é obrigatório" />
+								<h:message styleClass="help-block text-danger" for="name" />
+							</div>
+							<div class="form-group">
+								<!-- Your email input -->
+								<h:inputText type="email" autocomplete="off"
+									styleClass="form-control" pt:placeholder="E-mail *" id="email"
+									value="#{contactController.email}" required="true" size="25"
+									requiredMessage="O campo E-mail é obrigatório"
+									validatorMessage="E-mail inválido.">
+									<f:validateRegex
+										pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+								</h:inputText>
+								<h:message styleClass="help-block text-danger" for="email" />
+							</div>
+							<div class="form-group">
+								<!-- Your phone no. input -->
+								<h:inputText type="tel" autocomplete="off"
+									styleClass="form-control" pt:placeholder="Assunto *"
+									id="subject" value="#{contactController.subject}"
+									required="true" requiredMessage="O campo Assunto é obrigatório" />
+								<h:message styleClass="help-block text-danger" for="subject" />
+							</div>
+						</div>
+						<!-- End 6 column grid left form -->
+						<div class="col-md-6">
+							<!-- 6 column grid right form-->
+							<div class="form-group">
+								<!-- Your message input -->
+								<h:inputTextarea styleClass="form-control"
+									pt:placeholder="Mensagem *" id="message"
+									value="#{contactController.message}" required="true"
+									requiredMessage="O campo Mensagem é obrigatório" />
+								<h:message styleClass="help-block text-danger" for="message" />
+							</div>
+						</div>
+						<!-- End 6 column grid right form-->
+						<div class="clearfix"></div>
+						<div class="col-lg-2 col-lg-offset-5 text-center">
+							<div id="success"></div>
+							<p:commandLink styleClass="btn btn-send" value="Enviar Mensagem"
+								actionListener="#{contactController.send}" update="contactForm" />
+							<!-- Send button -->
+						</div>
+
+						<div class="col-lg-1 text-left">
+							<p:ajaxStatus style="width:24px;height:24px;"
+								id="contactAjaxStatusPanel">
+								<f:facet name="start">
+									<h:graphicImage name="img/ajaxloadingdark.gif" alt="" />
+								</f:facet>
+								<f:facet name="complete">
+								</f:facet>
+							</p:ajaxStatus>
+						</div>
+					</div>
+				</h:form>
+				<!-- End contact form -->
+			</div>
+			<!-- End container --> </section>
+			<!-- Start contact -->
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<p:ajaxStatus style="display:block;margin-bottom:2em;height:24px;">
+	<f:facet name="default">
+	</f:facet>
+
+	<f:facet name="start">
+	</f:facet>
+
+	<f:facet name="complete">
+	</f:facet>
+</p:ajaxStatus>
+
+<p:ajaxStatus onstart="PF('statusDialog').show()"
+	onsuccess="PF('statusDialog').hide()" />
+
+<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+	closable="false" resizable="false" showHeader="false">
+	<h:graphicImage name="/img/ajaxloadingbar.gif" />
+</p:dialog>
+
+</html>

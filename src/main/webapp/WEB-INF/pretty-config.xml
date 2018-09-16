@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+	<!-- About -->
+	<url-mapping id="about">
+		<pattern value="/about" />
+		<view-id value="/faces/about.xhtml" />
+	</url-mapping>
+	<url-mapping id="sobre">
+		<pattern value="/sobre" />
+		<view-id value="/faces/about.xhtml" />
+	</url-mapping>
+
+	<!-- Videos -->
+	<url-mapping id="videos">
+		<pattern value="/videos" />
+		<view-id value="/faces/videos.xhtml" />
+		<action>#{videoController.prepareVideos}</action>
+	</url-mapping>
+
+	<!-- Videos With Pages -->
+	<url-mapping id="videos-page">
+		<pattern value="/videos/#{page : videoController.page}" />
+		<view-id value="/faces/videos.xhtml" />
+		<action>#{videoController.preparePagedVideos}</action>
+	</url-mapping>
+
+	<!-- Posts -->
+	<url-mapping id="posts">
+		<pattern value="/posts" />
+		<view-id value="/faces/posts.xhtml" />
+		<action>#{postController.preparePosts}</action>
+	</url-mapping>
+	<url-mapping id="materias">
+		<pattern value="/materias" />
+		<view-id value="/faces/posts.xhtml" />
+		<action>#{postController.preparePosts}</action>
+	</url-mapping>
+
+	<!-- Posts With Pages -->
+	<url-mapping id="posts-page">
+		<pattern value="/posts/#{page : postController.page}" />
+		<view-id value="/faces/posts.xhtml" />
+		<action>#{postController.preparePagedPosts}</action>
+	</url-mapping>
+	<url-mapping id="materias-page">
+		<pattern value="/materias/#{page : postController.page}" />
+		<view-id value="/faces/posts.xhtml" />
+		<action>#{postController.preparePagedPosts}</action>
+	</url-mapping>
+
+	<!-- Contact -->
+	<url-mapping id="contact">
+		<pattern value="/contact" />
+		<view-id value="/faces/contact.xhtml" />
+	</url-mapping>
+	<url-mapping id="contato">
+		<pattern value="/contato" />
+		<view-id value="/faces/contact.xhtml" />
+	</url-mapping>
+
+	<!-- View Video -->
+	<url-mapping id="video">
+		<pattern value="/video/#{id : viewPostController.postId}" />
+		<view-id value="/faces/view-post.xhtml" />
+		<action>#{viewPostController.prepareView}</action>
+	</url-mapping>
+
+	<!-- View Post -->
+	<url-mapping id="materia">
+		<pattern value="/materia/#{id : viewPostController.postId}" />
+		<view-id value="/faces/view-post.xhtml" />
+		<action>#{viewPostController.prepareView}</action>
+	</url-mapping>
+
+	<url-mapping id="post">
+		<pattern value="/post/#{id : viewPostController.postId}" />
+		<view-id value="/faces/view-post.xhtml" />
+		<action>#{viewPostController.prepareView}</action>
+	</url-mapping>
+
+	<!-- Admin Area -->
+	
+	<url-mapping id="auth">
+		<pattern value="/auth" />
+		<view-id value="/faces/auth.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="admin-home">
+		<pattern value="/admin/" />
+		<view-id value="/faces/admin/index.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="admin-subscriptions">
+		<pattern value="/admin/subscriptions" />
+		<view-id value="/faces/admin/subscriptions.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="admin-posts">
+		<pattern value="/admin/posts" />
+		<view-id value="/faces/admin/posts.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="admin-new-post">
+		<pattern value="/admin/new-post" />
+		<view-id value="/faces/admin/create-edit-post.xhtml" />
+		<action>#{adminCreateEditPostController.prepareCreate}</action>
+	</url-mapping>
+
+	<url-mapping id="admin-edit-post">
+		<pattern value="/admin/edit-post/#{id : adminCreateEditPostController.postId}" />
+		<view-id value="/faces/admin/create-edit-post.xhtml" />
+		<action>#{adminCreateEditPostController.prepareEdit}</action>
+	</url-mapping>
+
+</pretty-config>

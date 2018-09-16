@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.com.marginais</groupId>
+	<artifactId>marginais</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>marginais Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.12</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.sun.faces/jsf-api -->
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.2.18</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.sun.faces/jsf-impl -->
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>2.2.18</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<!-- for JSF 2.x -->
+		<!-- https://mvnrepository.com/artifact/org.ocpsoft.rewrite/rewrite-servlet -->
+		<dependency>
+		    <groupId>org.ocpsoft.rewrite</groupId>
+		    <artifactId>rewrite-servlet</artifactId>
+		    <version>2.0.12.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.ocpsoft.rewrite/rewrite-config-prettyfaces -->
+		<dependency>
+		    <groupId>org.ocpsoft.rewrite</groupId>
+		    <artifactId>rewrite-config-prettyfaces</artifactId>
+		    <version>2.0.12.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-agroal</artifactId>
+			<version>5.3.6.Final</version>
+			<type>pom</type>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.googlecode.htmlcompressor/htmlcompressor -->
+		<dependency>
+			<groupId>com.googlecode.htmlcompressor</groupId>
+			<artifactId>htmlcompressor</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+		<!-- <dependency>
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet-shaded</artifactId>
+			<version>3.0.5.Final</version>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/com.yahoo.platform.yui/yuicompressor -->
+		<dependency>
+			<groupId>com.yahoo.platform.yui</groupId>
+			<artifactId>yuicompressor</artifactId>
+			<version>2.4.8</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>marginais</finalName>
+	</build>
+</project>
